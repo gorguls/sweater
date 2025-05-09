@@ -5,13 +5,22 @@
     <title>Title</title>
 </head>
 <body>
-    <p>Hello, {{name}}!</p>
+<div>
+    <form method="post">
+        <input type="text" name="text" placeholder="Текст сообщения">
+        <input type="text" name="tag" placeholder="Тэг">
+        <button type="submit">Отправить</button>
+    </form>
+</div>
+<div>Список сообщений</div>
 <div>
     {{#messages}}
+    <div>
         <b>{{id}}</b>
         <span>{{text}}</span>
         <span>{{tag}}</span>
     {{/messages}}
+</div>
 </div>
 </body>
 </html>
