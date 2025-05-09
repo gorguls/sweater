@@ -12,23 +12,23 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
 
-    private String message;
+    private String text;
     private String tag;
 
     public Message() {
     }
 
     public Message(String message, String tag) {
-        this.message = message;
+        this.text = message;
         this.tag = tag;
     }
 
     public String getMessage() {
-        return message;
+        return text;
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        this.text = message;
     }
 
     public String getTag() {
@@ -43,7 +43,7 @@ public class Message {
     public String toString() {
         return "message{" +
                 "id=" + id +
-                ", message='" + message + '\'' +
+                ", text='" + text + '\'' +
                 ", tag='" + tag + '\'' +
                 '}';
     }
