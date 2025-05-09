@@ -18,7 +18,7 @@ public class MainController {
     public MessageRepo messageRepo;
 
     @GetMapping("/")
-    public String main(Model model) {
+    public String mainPage(Model model) {
         Iterable<Message> messages = messageRepo.findAll();
         model.addAttribute("messages", messages);
         return "main";
