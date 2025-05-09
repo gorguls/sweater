@@ -7,16 +7,19 @@
 <body>
 <div>
     <form method="post" action="/">
-        <input type="text" name="text" placeholder="Текст сообщения">
+        <lable id="name">Сообщение</lable>
+        <input type="text" name="text" id="name" placeholder="Текст сообщения">
+        <lable id="name">Тэг</lable>
         <input type="text" name="tag" placeholder="Тэг">
         <button type="submit">Отправить</button>
     </form>
 </div>
 
 <div>
-    Фильтр
+    Фильтрация
     <form method="post" action="filter">
-        <input type="text" name="filter" placeholder="Тэг">
+        <lable id="filter">Фильтр</lable>
+        <input type="text" name="filter" id="filter" placeholder="Тэг">
         <button type="submit">Найти</button>
     </form>
 </div>
