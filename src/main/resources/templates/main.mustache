@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<div>Вы вошли как {{user}}</div>
 <div>
     <form action="/logout" method="post">
         <input type="hidden" name="_csrf" value="{{_csrf.token}}">
