@@ -23,7 +23,10 @@ public class MainController {
     }
 
     @GetMapping("/main")
-    public String main(@AuthenticationPrincipal User user, Model model) {
+    public String main(
+            @AuthenticationPrincipal User user,
+            Model model
+    ) {
         Iterable<Message> messages = messageRepo.findAll();
         model.addAttribute("messages", messages);
         model.addAttribute("user", user.getUsername());
@@ -31,9 +34,14 @@ public class MainController {
     }
 
     @PostMapping("/main")
-    public String addMessage(@AuthenticationPrincipal User user, @RequestParam String text, @RequestParam String tag, Model model) {
+    public String addMessage(
+            @AuthenticationPrincipal User user,
+            @RequestParam String text,
+            @RequestParam String tag,
+            Model model) {
+
         if (text != null && !text.isEmpty()) {
-            messageRepo.save(new Message(text, tag));
+            messageRepo.save(new Message(text, tag, user));
         }
 
         Iterable<Message> messages = messageRepo.findAll();
@@ -44,7 +52,10 @@ public class MainController {
     }
 
     @PostMapping("/filter")
-    public String filterMessages(@AuthenticationPrincipal User user, @RequestParam String filter, Model model) {
+    public String filterMessages(
+            @AuthenticationPrincipal User user,
+            @RequestParam String filter,
+            Model model) {
 
         Iterable<Message> messages;
 

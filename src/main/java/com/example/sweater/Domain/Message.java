@@ -1,9 +1,6 @@
 package com.example.sweater.Domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Message {
@@ -15,11 +12,24 @@ public class Message {
     private String text;
     private String tag;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User author;
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
     public Message() {
     }
 
-    public Message(String message, String tag) {
-        this.text = message;
+    public Message(String text, String tag, User user) {
+        this.author = user;
+        this.text = text;
         this.tag = tag;
     }
 
@@ -41,10 +51,11 @@ public class Message {
 
     @Override
     public String toString() {
-        return "message{" +
+        return "Message{" +
                 "id=" + id +
                 ", text='" + text + '\'' +
                 ", tag='" + tag + '\'' +
+                ", author=" + author +
                 '}';
     }
 }
