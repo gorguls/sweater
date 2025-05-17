@@ -1,15 +1,15 @@
 package com.example.sweater.Controllers;
 
 import com.example.sweater.Domain.Message;
+import com.example.sweater.Domain.User;
 import com.example.sweater.Repo.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
 
 @Controller
 public class MainController {
@@ -18,14 +18,20 @@ public class MainController {
     public MessageRepo messageRepo;
 
     @GetMapping("/")
-    public String mainPage(Model model) {
+    public String greeting() {
+        return "greeting";
+    }
+
+    @GetMapping("/main")
+    public String main(@AuthenticationPrincipal User user, Model model) {
         Iterable<Message> messages = messageRepo.findAll();
         model.addAttribute("messages", messages);
+        model.addAttribute("user", user.getUsername());
         return "main";
     }
 
-    @PostMapping("/")
-    public String addMessage(@RequestParam String text, @RequestParam String tag, Model model) {
+    @PostMapping("/main")
+    public String addMessage(@AuthenticationPrincipal User user, @RequestParam String text, @RequestParam String tag, Model model) {
         if (text != null && !text.isEmpty()) {
             messageRepo.save(new Message(text, tag));
         }
@@ -33,19 +39,24 @@ public class MainController {
         Iterable<Message> messages = messageRepo.findAll();
         model.addAttribute("messages", messages);
 
+        model.addAttribute("user", user.getUsername());
         return "main";
     }
 
     @PostMapping("/filter")
-    public String filterMessages(@RequestParam String filter, Model model) {
+    public String filterMessages(@AuthenticationPrincipal User user, @RequestParam String filter, Model model) {
+
+        Iterable<Message> messages;
+
         if (filter != null && !filter.isEmpty()) {
-            List<Message> messagesByTag = messageRepo.findByTag(filter);
-            model.addAttribute("messages", messagesByTag);
+            messages = messageRepo.findByTag(filter);
+            model.addAttribute("messages", messages);
         } else {
-            Iterable<Message> messages = messageRepo.findAll();
+            messages = messageRepo.findAll();
             model.addAttribute("messages", messages);
         }
 
+        model.addAttribute("user", user.getUsername());
         return "main";
     }
 }
