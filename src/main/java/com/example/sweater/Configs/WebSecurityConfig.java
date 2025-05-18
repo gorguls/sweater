@@ -43,6 +43,7 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/").permitAll()
+                        .requestMatchers("/static/**").permitAll()
                         .requestMatchers("/registration").permitAll()
                         .anyRequest().authenticated()
                 )
