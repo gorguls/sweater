@@ -1,7 +1,6 @@
 <#import "Parts/common.ftlh" as c>
 <#import "Parts/login.ftlh" as l>
 <@c.page>
-<div>Вы вошли как ${user}</div>
 <div>
     <@l.logout />
 </div>
@@ -18,10 +17,9 @@
 
 <div>
     Фильтрация
-    <form method="post" action="filter">
-        <input type="hidden" name="_csrf" value="${_csrf.token}">
-        <lable id="filter">Фильтр</lable>
-        <input type="text" name="filter" id="filter" placeholder="Тэг">
+    <form action="/main" method="get">
+        <label for="filter">Фильтр</label>
+        <input type="text" name="filter" id="filter" >
         <button type="submit">Найти</button>
     </form>
 </div>

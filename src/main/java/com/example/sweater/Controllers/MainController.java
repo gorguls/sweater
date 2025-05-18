@@ -25,29 +25,47 @@ public class MainController {
     @GetMapping("/main")
     public String main(
             @AuthenticationPrincipal User user,
+            @RequestParam(required = false) String filter,
             Model model
     ) {
-        Iterable<Message> messages = messageRepo.findAll();
-        model.addAttribute("messages", messages);
-        model.addAttribute("user", user.getUsername());
+        Iterable<Message> messages;
+
+        if (filter != null && !filter.isEmpty()) {
+            messages = messageRepo.findByTag(filter);
+            model.addAttribute("messages", messages);
+        } else {
+            messages = messageRepo.findAll();
+            model.addAttribute("messages", messages);
+        }
+
         return "main";
     }
 
     @PostMapping("/main")
     public String addMessage(
             @AuthenticationPrincipal User user,
+            @RequestParam(required = false) String filter,
             @RequestParam String text,
             @RequestParam String tag,
             Model model) {
+
+        Iterable<Message> messages;
+
+        if (filter != null && !filter.isEmpty()) {
+            messages = messageRepo.findByTag(filter);
+            model.addAttribute("messages", messages);
+        } else {
+            messages = messageRepo.findAll();
+            model.addAttribute("messages", messages);
+        }
 
         if (text != null && !text.isEmpty()) {
             messageRepo.save(new Message(text, tag, user));
         }
 
-        Iterable<Message> messages = messageRepo.findAll();
+        messages = messageRepo.findAll();
         model.addAttribute("messages", messages);
 
-        model.addAttribute("user", user.getUsername());
         return "main";
     }
 
@@ -67,7 +85,6 @@ public class MainController {
             model.addAttribute("messages", messages);
         }
 
-        model.addAttribute("user", user.getUsername());
         return "main";
     }
 }
