@@ -19,7 +19,7 @@
     Фильтрация
     <form action="/main" method="get">
         <label for="filter">Фильтр</label>
-        <input type="text" name="filter" id="filter" >
+        <input type="text" name="filter" id="filter" value="${filter}">
         <button type="submit">Найти</button>
     </form>
 </div>

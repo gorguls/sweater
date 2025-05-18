@@ -31,9 +31,11 @@ public class MainController {
         Iterable<Message> messages;
 
         if (filter != null && !filter.isEmpty()) {
+            model.addAttribute("filter", filter);
             messages = messageRepo.findByTag(filter);
             model.addAttribute("messages", messages);
         } else {
+            model.addAttribute("filter", "");
             messages = messageRepo.findAll();
             model.addAttribute("messages", messages);
         }
@@ -46,6 +48,7 @@ public class MainController {
             @AuthenticationPrincipal User user,
             @RequestParam String text,
             @RequestParam String tag,
+            @RequestParam(required = false) String filter,
             Model model) {
 
         Iterable<Message> messages;
@@ -56,6 +59,8 @@ public class MainController {
 
         messages = messageRepo.findAll();
         model.addAttribute("messages", messages);
+
+        model.addAttribute("filter", "");
 
         return "main";
     }
