@@ -44,20 +44,11 @@ public class MainController {
     @PostMapping("/main")
     public String addMessage(
             @AuthenticationPrincipal User user,
-            @RequestParam(required = false) String filter,
             @RequestParam String text,
             @RequestParam String tag,
             Model model) {
 
         Iterable<Message> messages;
-
-        if (filter != null && !filter.isEmpty()) {
-            messages = messageRepo.findByTag(filter);
-            model.addAttribute("messages", messages);
-        } else {
-            messages = messageRepo.findAll();
-            model.addAttribute("messages", messages);
-        }
 
         if (text != null && !text.isEmpty()) {
             messageRepo.save(new Message(text, tag, user));
