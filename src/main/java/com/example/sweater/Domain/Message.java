@@ -16,14 +16,6 @@ public class Message {
     @JoinColumn(name = "user_id")
     private User author;
 
-    public User getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
-    }
-
     public Message() {
     }
 
@@ -33,12 +25,16 @@ public class Message {
         this.tag = tag;
     }
 
-    public String getMessage() {
-        return text;
+    public Long getId() {
+        return id;
     }
 
-    public void setMessage(String message) {
-        this.text = message;
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
     public String getTag() {
@@ -47,6 +43,14 @@ public class Message {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     @Override
