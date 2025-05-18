@@ -1,11 +1,9 @@
 <#import "Parts/common.ftlh" as c>
+<#import "Parts/login.ftlh" as l>
 <@c.page>
 <div>Вы вошли как ${user}</div>
 <div>
-    <form action="/logout" method="post">
-        <input type="hidden" name="_csrf" value="${_csrf.token}">
-        <input type="submit" value="Logout">
-    </form>
+    <@l.logout />
 </div>
 <div>
     <form method="post" action="/main">
@@ -30,13 +28,16 @@
 
 <div>Список сообщений</div>
 <div>
-<#--    {{#messages}}-->
-<#--    <div>-->
-<#--        <b>{{id}}</b>-->
-<#--        <span>{{text}}</span>-->
-<#--        <i>{{tag}}</i>-->
-<#--        <strong>{{author.username}}</strong>-->
-<#--    {{/messages}}-->
-<#--</div>-->
+   <#list messages as message>
+    <div>
+        <b>${message.id}</b>
+        <span>${message.text}</span>
+        <i>${message.tag}</i>
+        <strong>${message.author.username}</strong>
+    </div>
+    <#else>
+        Нет сообщений
+    </#list>
 </div>
+
 </@c.page>
