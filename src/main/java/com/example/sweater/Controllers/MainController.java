@@ -30,7 +30,7 @@ public class MainController {
         Iterable<Message> messages = messageRepo.findAll();
         model.addAttribute("messages", messages);
         model.addAttribute("user", user.getUsername());
-        return "main";
+        return "main.ftlh";
     }
 
     @PostMapping("/main")
@@ -48,7 +48,7 @@ public class MainController {
         model.addAttribute("messages", messages);
 
         model.addAttribute("user", user.getUsername());
-        return "main";
+        return "main.ftlh";
     }
 
     @PostMapping("/filter")
@@ -68,6 +68,6 @@ public class MainController {
         }
 
         model.addAttribute("user", user.getUsername());
-        return "main";
+        return "main.ftlh";
     }
 }

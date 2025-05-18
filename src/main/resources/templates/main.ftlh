@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<div>Вы вошли как {{user}}</div>
+<#import "Parts/common.ftlh" as c>
+<@c.page>
+<div>Вы вошли как ${user}</div>
 <div>
     <form action="/logout" method="post">
-        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
-        <input type="submit" value="Log out">
+        <input type="hidden" name="_csrf" value="${_csrf.token}">
+        <input type="submit" value="Logout">
     </form>
 </div>
 <div>
     <form method="post" action="/main">
-        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+        <input type="hidden" name="_csrf" value="${_csrf.token}">
         <lable id="name">Сообщение</lable>
         <input type="text" name="text" id="name" placeholder="Текст сообщения">
         <lable id="name">Тэг</lable>
@@ -26,7 +21,7 @@
 <div>
     Фильтрация
     <form method="post" action="filter">
-        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+        <input type="hidden" name="_csrf" value="${_csrf.token}">
         <lable id="filter">Фильтр</lable>
         <input type="text" name="filter" id="filter" placeholder="Тэг">
         <button type="submit">Найти</button>
@@ -35,14 +30,13 @@
 
 <div>Список сообщений</div>
 <div>
-    {{#messages}}
-    <div>
-        <b>{{id}}</b>
-        <span>{{text}}</span>
-        <i>{{tag}}</i>
-        <strong>{{author.username}}</strong>
-    {{/messages}}
+<#--    {{#messages}}-->
+<#--    <div>-->
+<#--        <b>{{id}}</b>-->
+<#--        <span>{{text}}</span>-->
+<#--        <i>{{tag}}</i>-->
+<#--        <strong>{{author.username}}</strong>-->
+<#--    {{/messages}}-->
+<#--</div>-->
 </div>
-</div>
-</body>
-</html>
+</@c.page>
