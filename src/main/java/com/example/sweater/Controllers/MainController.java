@@ -25,21 +25,19 @@ public class MainController {
     @GetMapping("/main")
     public String main(
             @AuthenticationPrincipal User user,
-            @RequestParam(required = false) String filter,
+            @RequestParam(required = false, defaultValue = "") String filter,
             Model model
     ) {
         Iterable<Message> messages;
 
         if (filter != null && !filter.isEmpty()) {
-            model.addAttribute("filter", filter);
             messages = messageRepo.findByTag(filter);
             model.addAttribute("messages", messages);
         } else {
-            model.addAttribute("filter", "");
             messages = messageRepo.findAll();
             model.addAttribute("messages", messages);
         }
-
+        model.addAttribute("filter", filter);
         return "main";
     }
 
