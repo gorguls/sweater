@@ -25,6 +25,16 @@ public class Message {
         this.tag = tag;
     }
 
+    private String filename;
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
     public Long getId() {
         return id;
     }
