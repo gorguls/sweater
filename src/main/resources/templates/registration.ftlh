@@ -2,5 +2,5 @@
 <#import "Parts/login.ftlh" as l>
 <@c.page>
  <#if message??>${message}</#if>
-    <@l.login "/registration" />
+    <@l.login path="/registration" isRegisterForm=true/>
 </@c.page>
