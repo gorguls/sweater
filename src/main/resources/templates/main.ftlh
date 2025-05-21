@@ -35,29 +35,31 @@
                         <input class="form-control" type="file" name="file" id="formFile">
                     </div>
                     <button type="submit" class="btn btn-primary">Отправить</button>
+
+                </form>
             </div>
-            </form>
         </div>
     </div>
-    </div>
 
-    <div>Список сообщений</div>
-    <div>
-        <#list messages as message>
-            <div>
-                <b>${message.id}</b>
-                <span>${message.text}</span>
+    <h3>Список сообщений</h3>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+    <#list messages as message>
+        <div class="card" style="width: 18rem;">
+            <#if message.filename??>
+                <img src="/img/${message.filename}" alt="" class="card-img-top" alt="...">
+            </#if>
+            <div class="card-body">
+                <#--                <b>${message.id}</b>-->
+                <p class="card-text">${message.text}</p>
                 <i>${message.tag}</i>
-                <strong>${message.author.username}</strong>
-                <div>
-                    <#if message.filename??>
-                        <img src="/img/${message.filename}" alt="">
-                    </#if>
+                <div class="card-footer text-body-secondary">
+                    ${message.author.username}
                 </div>
             </div>
-        <#else>
-            Нет сообщений
-        </#list>
+        </div>
+    <#else>
+        Нет сообщений
+    </#list>
     </div>
 
 </@c.page>
